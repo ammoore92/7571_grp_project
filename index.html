@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <title>Reading Challenge</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" id="title">
+        <h1>Reading Challenge</h1>
+      </div>
+      
+      <div id="basicPage">
+        <div class="row">
+          <div id="topBanner1"></div>
+        </div>
+
+        <hr />
+        <input
+        type="button"
+        class="form-control btn btn-success"
+        id="startChallenge"
+        value="Start Challenge"
+      />
+
+        <div class="row" id="middle"></div>
+    </div>
+  </body>
+  <footer>
+    <hr />
+    <p>
+      MIST7571E: Final Project
+      <br />
+      Created by: Angel Moore, Anita Lee, Avery Bray,<br />
+      Jonathon Robinson, Lance Hunter, & Lauren Faulk
+    </p>
+  </footer>
+
+  <script type="text/javascript">
+    document
+      .getElementById("startChallenge")
+      .addEventListener("click", basicPage);
+
+    var booksCompleted = 14;
+    var booksPledged = 15;
+    var challengeMonth = "July";
+    var challengeYear = 2020;
+    var challengeMonthDays = 31;
+
+    function basicPage() {
+      document.getElementById("startChallenge").style.display = "none";
+      topBannerPopulation();
+      middleBannerPopulation();
+    }
+
+    function topBannerPopulation() {
+      var todayDate = new Date();
+      var completionPercentage = Math.round(
+        (booksCompleted / booksPledged) * 100
+      );
+      var topHTML = "";
+
+      topHTML +=
+        "<h4>Read " +
+        booksPledged +
+        " books in " +
+        challengeMonth +
+        " " +
+        challengeYear +
+        ".";
+      topHTML += "<br />";
+      topHTML += "# books " + "behind/ahead of" + " schedule.";
+      topHTML += "<br /><br />";
+      topHTML += "</h4>";
+      topHTML += "<div class='progress'>";
+      topHTML +=
+        "<div class='progress-bar progress-bar-success progress-bar-striped' role='progressbar' atria-valuenow='" +
+        completionPercentage +
+        "' atria-valuemin='0' atria-valuemax='100' style='width:" +
+        completionPercentage +
+        "%'";
+      topHTML += "</div>";
+      topHTML += completionPercentage + "%";
+      topHTML += "</div>";
+
+      document.getElementById("topBanner1").innerHTML = topHTML;
+      document.getElementById("startChallenge").innerHTML =
+        "<input type='button' class='form-control btn btn-success' id='startChallenge' value='Start Challenge Again'>";
+    }
+
+    function middleBannerPopulation() {
+      console.log("start here");
+      var middleHTML = "";
+      middleHTML += "<div class='col-md-5' id='want'>";
+      middleHTML += "<h3>Want to Read</h3>";
+      middleHTML += "Text box to pick up book arrays here";
+      middleHTML += "</div>";
+      middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
+      middleHTML += "<div class='col-md-5' id='completed'>";
+      middleHTML += "<h3>Completed</h3>";
+      middleHTML += "Text box to pick up completed book arrays here";
+      middleHTML += "</div>";
+
+      document.getElementById("middle").innerHTML = middleHTML;
+    }
+  </script>
+</html>
