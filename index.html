@@ -102,17 +102,24 @@
     function middleBannerPopulation() {
       console.log("start here");
       var middleHTML = "";
-      middleHTML += "<div class='col-md-5' id='want'>";
-      middleHTML += "<h3>Want to Read</h3>";
-      middleHTML += "Text box to pick up book arrays here";
-      middleHTML += "</div>";
-      middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
-      middleHTML += "<div class='col-md-5' id='completed'>";
-      middleHTML += "<h3>Completed</h3>";
-      middleHTML += "Text box to pick up completed book arrays here";
-      middleHTML += "</div>";
+        middleHTML += "<div class='col-md-5' id='want'>";
+        middleHTML += "<h3>Want to Read</h3>";
+        middleHTML += "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
+        middleHTML += "</div>";
+        middleHTML += "<br />";
+        middleHTML += "<input type='button' value='Update' />"
+        middleHTML += "</div>";
+        middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
+        middleHTML += "<div class='col-md-5' id='completed'>";
+        middleHTML += "<h3>Completed</h3>";
+        middleHTML += "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
+        middleHTML += "</div>";
+        middleHTML += "<br />";
+        middleHTML += "<input type='button' value='Update' />"
+        middleHTML += "</div>";
 
       document.getElementById("middle").innerHTML = middleHTML;
     }
+
   </script>
 </html>
