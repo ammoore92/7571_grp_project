@@ -29,6 +29,8 @@
         id="startChallenge"
         value="Start Challenge"
       />
+      <div id="editReading"></div>
+
 
         <div class="row" id="middle"></div>
     </div>
@@ -46,7 +48,7 @@
   <script type="text/javascript">
     document
       .getElementById("startChallenge")
-      .addEventListener("click", basicPage);
+      .addEventListener("click", startPage);
 
     var booksCompleted = 14;
     var booksPledged = 15;
@@ -61,14 +63,25 @@
         //(Status of 0 would be in NYT list, 1 would be want to read, 2 would be completed)
     };
 
-    function basicPage() {
+    function startPage() {
       document.getElementById("startChallenge").style.display = "none";
       editPage();
     }
 
     function editPage() {
+        var editReading = "";
+        editReading += "<h3>Edit Challenge</h3>";
+        editReading += "<input type='button' id ='saveChallenge' value='Save' />"
+        document.getElementById("editReading").innerHTML = editReading;
+        document.getElementById("saveChallenge").addEventListener("click", basicPage);
+    }
+
+    function basicPage() {
+        
         topBannerPopulation();
         middleBannerPopulation();
+        var removeEdit = document.getElementById("editReading");
+        removeEdit.remove();
     }
 
     function topBannerPopulation() {
@@ -102,8 +115,6 @@
       topHTML += "</div>";
 
       document.getElementById("topBanner1").innerHTML = topHTML;
-      document.getElementById("startChallenge").innerHTML =
-        "<input type='button' class='form-control btn btn-success' id='startChallenge' value='Start Challenge Again'>";
     }
 
     function middleBannerPopulation() {
