@@ -10,35 +10,32 @@
       crossorigin="anonymous"
     />
     <style>
-      img{
-        width: 100px;
-        height: 125px;
+      img {
+        width: 75px;
+        height: 100px;
       }
     </style>
     <title>Reading Challenge</title>
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row" id="title">
-        <h1>Reading Challenge</h1>
-      </div>
-      
+      <div class="row" id="title"><h1>Reading Challenge</h1></div>
+
       <div id="basicPage">
-        <div class="row">
-          <div id="topBanner1"></div>
-        </div>
+        <div class="row"><div id="topBanner1"></div></div>
 
         <hr />
-        <input
-        type="button"
-        class="form-control btn btn-success"
-        id="startChallenge"
-        value="Start Challenge"
-      />
-      <div id="editReading"></div>
 
+        <input
+          type="button"
+          class="form-control btn btn-success"
+          id="startChallenge"
+          value="Start Challenge"
+        />
+        <div id="editReading"></div>
 
         <div class="row" id="middle"></div>
+      </div>
     </div>
   </body>
 
@@ -64,29 +61,35 @@
     var challengeMonthDays = 31;
 
     var chosenBooks = {
-        b9780525536291: {
-          bookCover: "https://s1.nyt.com/du/books/images/9780525536291.jpg",
-          title: "The Vanishing Half",
-          author: "Brit Bennett",
-          isbn: "9780525536291",
-          status: 0
-        },
-        b9780316420044: {
-          bookCover: "https://s1.nyt.com/du/books/images/9780316420044.jpg",
-          title: "28 Summers",
-          author: "Elin Hilderbrand",
-          isbn: "9780316420044",
-          status: 1
-        },
-        b9780735219090: {
-          bookCover: "https://s1.nyt.com/du/books/images/9780735219090.jpg",
-          title: "Where the Crawdads Sing",
-          author: "Delia Owens",
-          isbn: "9780735219090",
-          status: 1
-        }
-      }
-    
+      b9780525536291: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780525536291.jpg",
+        title: "The Vanishing Half",
+        author: "Brit Bennett",
+        isbn: "9780525536291",
+        status: 0,
+      },
+      b9780316420044: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780316420044.jpg",
+        title: "28 Summers",
+        author: "Elin Hilderbrand",
+        isbn: "9780316420044",
+        status: 1,
+      },
+      b9780735219090: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780735219090.jpg",
+        title: "Where the Crawdads Sing",
+        author: "Delia Owens",
+        isbn: "9780735219090",
+        status: 1,
+      },
+      b9780385546270: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780385546270.jpg",
+        title: "Sex and Vantity",
+        author: "Kevin Kwan",
+        isbn: "9780385546270",
+        status: 2,
+      },
+    };
 
     function startPage() {
       document.getElementById("startChallenge").style.display = "none";
@@ -94,19 +97,20 @@
     }
 
     function editPage() {
-        var editReading = "";
-        editReading += "<h3>Edit Challenge</h3>";
-        editReading += "<input type='button' id ='saveChallenge' value='Save' />"
-        document.getElementById("editReading").innerHTML = editReading;
-        document.getElementById("saveChallenge").addEventListener("click", basicPage);
+      var editReading = "";
+      editReading += "<h3>Edit Challenge</h3>";
+      editReading += "<input type='button' id ='saveChallenge' value='Save' />";
+      document.getElementById("editReading").innerHTML = editReading;
+      document
+        .getElementById("saveChallenge")
+        .addEventListener("click", basicPage);
     }
 
     function basicPage() {
-        
-        topBannerPopulation();
-        middleBannerPopulation();
-        var removeEdit = document.getElementById("editReading");
-        removeEdit.remove();
+      topBannerPopulation();
+      middleBannerPopulation();
+      var removeEdit = document.getElementById("editReading");
+      removeEdit.remove();
     }
 
     function topBannerPopulation() {
@@ -144,29 +148,31 @@
 
     function middleBannerPopulation() {
       var middleHTML = "";
-        middleHTML += "<div class='col-md-5' id='want'>";
-        middleHTML += "<h3>Want to Read</h3>";
-        middleHTML += "<div id='wantList' style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
-        middleHTML += wantToRead();
-        middleHTML += "</div>";
-        middleHTML += "<br />";
-        middleHTML += "<input type='button' value='Update' />"
-        middleHTML += "</div>";
-        middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
-        middleHTML += "<div class='col-md-5' id='completed'>";
-        middleHTML += "<h3>Completed</h3>";
-        middleHTML += "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
-        middleHTML += "List of books with status of 2";
-        middleHTML += "</div>";
-        middleHTML += "<br />";
-        middleHTML += "<input type='button' value='Update' />"
-        middleHTML += "</div>";
+      middleHTML += "<div class='col-md-5' id='want'>";
+      middleHTML += "<h3>Want to Read</h3>";
+      middleHTML +=
+        "<div id='wantList' style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
+      middleHTML += wantToRead();
+      middleHTML += "</div>";
+      middleHTML += "<br />";
+      middleHTML += "<input type='button' value='Update' />";
+      middleHTML += "</div>";
+      middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
+      middleHTML += "<div class='col-md-5' id='completed'>";
+      middleHTML += "<h3>Completed</h3>";
+      middleHTML +=
+        "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
+      middleHTML += "List of books with status of 2";
+      middleHTML += "</div>";
+      middleHTML += "<br />";
+      middleHTML += "<input type='button' value='Update' />";
+      middleHTML += "</div>";
 
       document.getElementById("middle").innerHTML = middleHTML;
     }
 
     function wantToRead() {
-        //(Status of 0 would be in NYT list, 1 would be want to read, 2 would be completed)
+      //(Status of 0 would be in NYT list, 1 would be want to read, 2 would be completed)
       var chosenBooksOutput = "";
 
       chosenBooksOutput += "<table>";
@@ -179,27 +185,31 @@
 
       chosenBooksOutput += "<tbody>";
       chosenBooksOutput += "<tr>";
-      chosenBooksOutput += "<td><img class = 'book' src='"+chosenBooks.b9780316420044.bookCover + "'></td>";
-      chosenBooksOutput += "<td><i>"
-        + chosenBooks.b9780316420044.title
-        + "</i> <br /> by "
-        + chosenBooks.b9780316420044.author
-        + "</td><td><input type='checkbox' value = '3' /></td></tr>";
-      chosenBooksOutput += "<td><img class = 'book' src='"+chosenBooks.b9780525536291.bookCover + "'></td>";
-      chosenBooksOutput += "<td><i>"
-        + chosenBooks.b9780525536291.title
-        + "</i> <br /> by "
-        + chosenBooks.b9780525536291.author
-        + "</td><td><input type='checkbox' value = '3' /></td></tr>";
+      chosenBooksOutput +=
+        "<td><img class = 'book' src='" +
+        chosenBooks.b9780316420044.bookCover +
+        "'></td>";
+      chosenBooksOutput +=
+        "<td><i>" +
+        chosenBooks.b9780316420044.title +
+        "</i> <br /> by " +
+        chosenBooks.b9780316420044.author +
+        "</td><td><input type='checkbox' value = '3' /></td></tr>";
+      chosenBooksOutput +=
+        "<td><img class = 'book' src='" +
+        chosenBooks.b9780525536291.bookCover +
+        "'></td>";
+      chosenBooksOutput +=
+        "<td><i>" +
+        chosenBooks.b9780525536291.title +
+        "</i> <br /> by " +
+        chosenBooks.b9780525536291.author +
+        "</td><td><input type='checkbox' value = '3' /></td></tr>";
 
       chosenBooksOutput += "</tbody>";
       chosenBooksOutput += "</table>";
-      
-      
 
       return chosenBooksOutput;
     }
-
-    
   </script>
 </html>

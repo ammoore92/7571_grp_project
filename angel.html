@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <style>
+      img {
+        width: 75px;
+        height: 100px;
+      }
+    </style>
+    <title>Array Breakdown</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <input type="button" id="go" value="Go" />
+      </div>
+      <hr />
+      <div class="row">
+        <div id="all"></div>
+        <div id="explore"></div>
+      </div>
+      <hr />
+      <div class="row">
+        <div id="want"></div>
+      </div>
+      <hr />
+      <div class="row">
+        <div id="done"></div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    document.getElementById("go").addEventListener("click", loadBooks);
+
+    var books = {
+      b9780525536291: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780525536291.jpg",
+        title: "The Vanishing Half",
+        author: "Brit Bennett",
+        isbn: "9780525536291",
+        status: 0,
+      },
+      b9780316420044: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780316420044.jpg",
+        title: "28 Summers",
+        author: "Elin Hilderbrand",
+        isbn: "9780316420044",
+        status: 1,
+      },
+      b9780735219090: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780735219090.jpg",
+        title: "Where the Crawdads Sing",
+        author: "Delia Owens",
+        isbn: "9780735219090",
+        status: 1,
+      },
+      b9780385546270: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780385546270.jpg",
+        title: "Sex and Vantity",
+        author: "Kevin Kwan",
+        isbn: "9780385546270",
+        status: 2,
+      },
+    };
+
+    function loadBooks() {
+      allBooks();
+      wantBooks();
+      doneBooks();
+    }
+
+    function allBooks() {
+      var allBooksTable = "";
+
+      allBooksTable += "<h3>ALL</h3>";
+      allBooksTable += "<br />";
+      allBooksTable += "<table class='table'>";
+      allBooksTable += "<thead>";
+      allBooksTable += "<tr>";
+      allBooksTable += "<th>Cover</th>";
+      allBooksTable += "<th>Title</th>";
+      allBooksTable += "<th>Author</th>";
+      allBooksTable += "<th>Status</th>";
+      allBooksTable += "</tr>";
+      allBooksTable += "</thead>";
+      allBooksTable += "<tbody>";
+      console.log(books);
+
+      Object.keys(books).forEach(function (key) {
+        allBooksTable += "<tr>";
+        allBooksTable += "<td><img src='" + books[key].bookCover + "'></td>";
+        allBooksTable += "<td><i>" + books[key].title + "</i></td>";
+        allBooksTable += "<td>" + books[key].author + "</td>";
+        allBooksTable += "<td>" + books[key].status + "</td>";
+        allBooksTable += "</tr>";
+      });
+
+      allBooksTable += "</tbody>";
+      allBooksTable += "</table>";
+
+      document.getElementById("all").innerHTML = allBooksTable;
+    }
+
+    function wantBooks() {
+      var wantBooksTable = "";
+
+      wantBooksTable += "<h3>WANT</h3>";
+      wantBooksTable += "<br />";
+      wantBooksTable += "<table class='table'>";
+      wantBooksTable += "<thead>";
+      wantBooksTable += "<tr>";
+      wantBooksTable += "<th>Cover</th>";
+      wantBooksTable += "<th>Title</th>";
+      wantBooksTable += "<th>Author</th>";
+      wantBooksTable += "<th>Status</th>";
+      wantBooksTable += "</tr>";
+      wantBooksTable += "</thead>";
+      wantBooksTable += "<tbody>";
+
+      Object.keys(books).forEach(function (key) {
+        wantBooksTable += "<tr>";
+        wantBooksTable += "<td>" + books[key].bookCover + "</td>";
+        wantBooksTable += "<td><i>" + books[key].title + "</i></td>";
+        wantBooksTable += "<td>" + books[key].author + "</td>";
+        wantBooksTable += "<td>" + books[key].status + "</td>";
+        wantBooksTable += "</tr>";
+      });
+
+      wantBooksTable += "</tbody>";
+      wantBooksTable += "</table>";
+
+      document.getElementById("want").innerHTML = wantBooksTable;
+    }
+
+    function doneBooks() {
+      var doneBooksTable = "";
+
+      doneBooksTable += "<h3>DONE</h3>";
+      doneBooksTable += "<br />";
+      doneBooksTable += "<table>";
+      doneBooksTable += "<thead>";
+      doneBooksTable += "<tr>";
+      doneBooksTable += "<th>Cover</th>";
+      doneBooksTable += "<th>Title</th>";
+      doneBooksTable += "<th>Author</th>";
+      doneBooksTable += "<th>Status</th>";
+      doneBooksTable += "</tr>";
+      doneBooksTable += "</thead>";
+      doneBooksTable += "<tbody>";
+
+      doneBooksTable += "</tbody>";
+      doneBooksTable += "</table>";
+
+      document.getElementById("done").innerHTML = doneBooksTable;
+    }
+  </script>
+</html>
