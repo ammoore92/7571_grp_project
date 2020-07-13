@@ -162,7 +162,7 @@
       middleHTML += "<h3>Completed</h3>";
       middleHTML +=
         "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
-      middleHTML += "List of books with status of 2";
+      middleHTML += doneBooks();
       middleHTML += "</div>";
       middleHTML += "<br />";
       middleHTML += "<input type='button' value='Update' />";
@@ -172,10 +172,9 @@
     }
 
     function wantToRead() {
-      //(Status of 0 would be in NYT list, 1 would be want to read, 2 would be completed)
       var chosenBooksOutput = "";
 
-      chosenBooksOutput += "<table>";
+      chosenBooksOutput += "<table class='table'>";
 
       chosenBooksOutput += "<thead>";
       chosenBooksOutput += "<th>Cover</th>";
@@ -184,32 +183,68 @@
       chosenBooksOutput += "</thead>";
 
       chosenBooksOutput += "<tbody>";
-      chosenBooksOutput += "<tr>";
-      chosenBooksOutput +=
-        "<td><img class = 'book' src='" +
-        chosenBooks.b9780316420044.bookCover +
-        "'></td>";
-      chosenBooksOutput +=
-        "<td><i>" +
-        chosenBooks.b9780316420044.title +
-        "</i> <br /> by " +
-        chosenBooks.b9780316420044.author +
-        "</td><td><input type='checkbox' value = '3' /></td></tr>";
-      chosenBooksOutput +=
-        "<td><img class = 'book' src='" +
-        chosenBooks.b9780525536291.bookCover +
-        "'></td>";
-      chosenBooksOutput +=
-        "<td><i>" +
-        chosenBooks.b9780525536291.title +
-        "</i> <br /> by " +
-        chosenBooks.b9780525536291.author +
-        "</td><td><input type='checkbox' value = '3' /></td></tr>";
+
+      Object.keys(chosenBooks).forEach(function (key) {
+        if (chosenBooks[key].status == 1) {
+          chosenBooksOutput += "<tr>";
+          chosenBooksOutput +=
+            "<td><img src='" + chosenBooks[key].bookCover + "'></td>";
+          chosenBooksOutput +=
+            "<td><i>" +
+            chosenBooks[key].title +
+            "</i><br>" +
+            chosenBooks[key].author +
+            "</td>";
+          chosenBooksOutput +=
+            "<td><input type='checkbox' id='book" +
+            chosenBooks[key].isbn +
+            "'/></td>";
+          chosenBooksOutput += "</tr>";
+        }
+      });
 
       chosenBooksOutput += "</tbody>";
       chosenBooksOutput += "</table>";
 
       return chosenBooksOutput;
+    }
+
+    function doneBooks() {
+      var doneBooksOutput = "";
+
+      doneBooksOutput += "<table class='table'>";
+
+      doneBooksOutput += "<thead>";
+      doneBooksOutput += "<th>Cover</th>";
+      doneBooksOutput += "<th>Title/Author</th>";
+      doneBooksOutput += "<th>Completed</th>";
+      doneBooksOutput += "</thead>";
+
+      doneBooksOutput += "<tbody>";
+
+      Object.keys(chosenBooks).forEach(function (key) {
+        if (chosenBooks[key].status == 2) {
+          doneBooksOutput += "<tr>";
+          doneBooksOutput +=
+            "<td><img src='" + chosenBooks[key].bookCover + "'></td>";
+          doneBooksOutput +=
+            "<td><i>" +
+            chosenBooks[key].title +
+            "</i><br>" +
+            chosenBooks[key].author +
+            "</td>";
+          doneBooksOutput +=
+            "<td><input type='checkbox' id='book" +
+            chosenBooks[key].isbn +
+            "'/></td>";
+          doneBooksOutput += "</tr>";
+        }
+      });
+
+      doneBooksOutput += "</tbody>";
+      doneBooksOutput += "</table>";
+
+      return doneBooksOutput;
     }
   </script>
 </html>

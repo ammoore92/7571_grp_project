@@ -126,12 +126,14 @@
       wantBooksTable += "<tbody>";
 
       Object.keys(books).forEach(function (key) {
-        wantBooksTable += "<tr>";
-        wantBooksTable += "<td>" + books[key].bookCover + "</td>";
-        wantBooksTable += "<td><i>" + books[key].title + "</i></td>";
-        wantBooksTable += "<td>" + books[key].author + "</td>";
-        wantBooksTable += "<td>" + books[key].status + "</td>";
-        wantBooksTable += "</tr>";
+        if (books[key].status > 0) {
+          wantBooksTable += "<tr>";
+          wantBooksTable += "<td><img src='" + books[key].bookCover + "'></td>";
+          wantBooksTable += "<td><i>" + books[key].title + "</i></td>";
+          wantBooksTable += "<td>" + books[key].author + "</td>";
+          wantBooksTable += "<td>" + books[key].status + "</td>";
+          wantBooksTable += "</tr>";
+        }
       });
 
       wantBooksTable += "</tbody>";
