@@ -14,6 +14,8 @@
         width: 75px;
         height: 100px;
       }
+
+      /*Need fixed table headers*/
     </style>
     <title>Reading Challenge</title>
   </head>
@@ -196,9 +198,13 @@
             chosenBooks[key].author +
             "</td>";
           chosenBooksOutput +=
-            "<td><input type='checkbox' id='book" +
+            "<td><select name='option1' class='bookDD1' id='b" +
             chosenBooks[key].isbn +
-            "'/></td>";
+            "'>";
+          chosenBooksOutput += "<option></option>";
+          chosenBooksOutput += "<option value='read'>Read</option>";
+          chosenBooksOutput += "<option value='remove'>Remove</option>";
+          chosenBooksOutput += "</select></td>";
           chosenBooksOutput += "</tr>";
         }
       });
@@ -234,9 +240,13 @@
             chosenBooks[key].author +
             "</td>";
           doneBooksOutput +=
-            "<td><input type='checkbox' id='book" +
+            "<td><select name='option2' class='bookDD2' id='b" +
             chosenBooks[key].isbn +
-            "'/></td>";
+            "'>";
+          doneBooksOutput += "<option></option>";
+          doneBooksOutput += "<option value='want'>Undo Read</option>";
+          doneBooksOutput += "<option value='remove'>Remove</option>";
+          doneBooksOutput += "</select></td>";
           doneBooksOutput += "</tr>";
         }
       });

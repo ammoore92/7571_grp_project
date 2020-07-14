@@ -53,7 +53,7 @@
         title: "28 Summers",
         author: "Elin Hilderbrand",
         isbn: "9780316420044",
-        status: 1,
+        status: 0,
       },
       b9780735219090: {
         bookCover: "https://s1.nyt.com/du/books/images/9780735219090.jpg",
@@ -73,8 +73,6 @@
 
     function loadBooks() {
       allBooks();
-      wantBooks();
-      doneBooks();
     }
 
     function allBooks() {
@@ -89,10 +87,10 @@
       allBooksTable += "<th>Title</th>";
       allBooksTable += "<th>Author</th>";
       allBooksTable += "<th>Status</th>";
+      allBooksTable += "<th>Completed</th>";
       allBooksTable += "</tr>";
       allBooksTable += "</thead>";
       allBooksTable += "<tbody>";
-      console.log(books);
 
       Object.keys(books).forEach(function (key) {
         allBooksTable += "<tr>";
@@ -100,13 +98,30 @@
         allBooksTable += "<td><i>" + books[key].title + "</i></td>";
         allBooksTable += "<td>" + books[key].author + "</td>";
         allBooksTable += "<td>" + books[key].status + "</td>";
+        allBooksTable += "<td>";
+        allBooksTable +=
+          "<select id='b" +
+          books[key].isbn +
+          "' name='moveToWantList' class='bookDD'>";
+        allBooksTable += "<option value='blank'></option>";
+        allBooksTable += "<option value='want'>Want to Read</option>";
+        allBooksTable += "<option value='read'>Read</option>";
+        allBooksTable += "<option value='remove'>Remove</option>";
+        allBooksTable += "</select>";
+        allBooksTable += "</td>";
         allBooksTable += "</tr>";
       });
 
       allBooksTable += "</tbody>";
       allBooksTable += "</table>";
+      allBooksTable += "<br/>";
+      allBooksTable +=
+        "<input type='button' id='update1' value='Move to Want'/>";
 
       document.getElementById("all").innerHTML = allBooksTable;
+
+      document.getElementById("update1").addEventListener("click", moveBooks);
+      document.getElementById("update1").addEventListener("click", wantBooks);
     }
 
     function wantBooks() {
@@ -162,6 +177,70 @@
       doneBooksTable += "</table>";
 
       document.getElementById("done").innerHTML = doneBooksTable;
+    }
+
+    function moveBooks() {
+      Object.keys(books).forEach(function (key) {
+        //console.log(books[key]);
+      });
+      var bookKeys = Object.keys(books);
+      //get the values from the dropdowns
+      var elements = document.getElementsByClassName("bookDD");
+      var elementNames = "";
+      for (var a = 0; a < elements.length; a++) {
+        elementNames += elements[a].id + "@" + elements[a].value + "@";
+        elementNames += "*";
+      }
+      //split out the elements
+      var elementArray = elementNames.split("*");
+      //filter down the elements to the change needed; 1 = want, 2 = read, 3 = remove
+      var elementArray1 = "";
+      var elementArray2 = "";
+      var elementArray3 = "";
+      var elementArrayWant = "";
+      var elementArrayRead = "";
+      var elementArrayRemove = "";
+      for (b = 0; b < elementArray.length; b++) {
+        if (elementArray[b].includes("want")) {
+          elementArray1 += elementArray[b];
+        }
+        if (elementArray[b].includes("read")) {
+          elementArray2 += elementArray[b];
+        }
+        if (elementArray[b].includes("remove")) {
+          elementArray3 += elementArray[b];
+        }
+      }
+      var elementArrayWant = elementArray1.split("@");
+      var elementArrayRead = elementArray2.split("@");
+      var elementArrayRemove = elementArray3.split("@");
+      //Remove status and blanks from the arrays
+      for (var c = elementArrayWant.length - 1; c--; ) {
+        if (elementArrayWant[c] === "want") elementArrayWant.splice(c, 1);
+        if (elementArrayWant[c] === "") elementArrayWant.splice(c, 1);
+      }
+      for (var d = elementArrayRead.length - 1; d--; ) {
+        if (elementArrayRead[d] === "read") elementArrayRead.splice(d, 1);
+        if (elementArrayRead[d] === "read") elementArrayRead.splice(d, 1);
+      }
+      for (var e = elementArrayRead.length - 1; e--; ) {
+        if (elementArrayRead[e] === "read") elementArrayRead.splice(e, 1);
+        if (elementArrayRead[e] === "read") elementArrayRead.splice(e, 1);
+      }
+
+      //modify status
+
+      console.log(elementArrayWant);
+      console.log(bookKeys);
+
+      for (f = 0; f < bookKeys.length; f++){
+          if (bookKeys.includes(elementArrayWant) == true){
+            //Object.keys(books).forEach(function (key) {}
+            alert("match");
+          }
+      }
+
+
     }
   </script>
 </html>
