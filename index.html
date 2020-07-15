@@ -95,27 +95,35 @@
     var bookKeys = Object.keys(chosenBooks);
 
     function startPage() {
+      //remove start button
       document.getElementById("startChallenge").style.display = "none";
+      //goes to the edit page
       editPage();
     }
 
     function editPage() {
+      //populate the overall Edit page
       var editReading = "";
       editReading += "<h3>Edit Challenge</h3>";
       editReading += "<input type='button' id ='saveChallenge' value='Save' />";
       document.getElementById("editReading").innerHTML = editReading;
+      //go to the Basic Page interface
       document
         .getElementById("saveChallenge")
         .addEventListener("click", basicPage);
     }
 
     function basicPage() {
+      //populates the reading challenge # and status
       topBannerPopulation();
+      //populates the book list in both boxes
       middleBannerPopulation();
+      //removes the edit button
       var removeEdit = document.getElementById("editReading");
       removeEdit.remove();
     }
 
+    //components that comprise the reading challenge # and status
     function topBannerPopulation() {
       var todayDate = new Date();
       var completionPercentage = Math.round(
@@ -149,6 +157,7 @@
       document.getElementById("topBanner1").innerHTML = topHTML;
     }
 
+    //populates the middle of the basic page with the books selected
     function middleBannerPopulation() {
       var middleHTML = "";
       middleHTML += "<div class='col-md-5' id='want'>";
@@ -177,6 +186,7 @@
         .addEventListener("click", completedBooks);
     }
 
+    //displays the books that have been selected as want to read
     function wantToRead() {
       var chosenBooksOutput = "";
 
@@ -219,6 +229,7 @@
       return chosenBooksOutput;
     }
 
+    //displays the books that have been read
     function doneBooks() {
       var doneBooksOutput = "";
 
@@ -261,8 +272,8 @@
       return doneBooksOutput;
     }
 
+    //move books from Want to Read --> Completed
     function completedBooks() {
-      //move books from Want to Read --> Completed
       //need to call to removeBooks()
 
       //get the values from the dropdowns
@@ -305,13 +316,12 @@
       }
     }
 
+    //move books from Completed --> Want to Read
     function undoBooks() {
-      //move books from Completed --> Want to Read
       //need to call to removeBooks()
     }
 
-    function removeBooks() {
-      //remove books entirely from challenge
-    }
+    //remove books entirely from challenge
+    function removeBooks() {}
   </script>
 </html>
