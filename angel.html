@@ -180,9 +180,6 @@
     }
 
     function moveBooks() {
-      Object.keys(books).forEach(function (key) {
-        //console.log(books[key]);
-      });
       var bookKeys = Object.keys(books);
       //get the values from the dropdowns
       var elements = document.getElementsByClassName("bookDD");
@@ -221,26 +218,31 @@
       }
       for (var d = elementArrayRead.length - 1; d--; ) {
         if (elementArrayRead[d] === "read") elementArrayRead.splice(d, 1);
-        if (elementArrayRead[d] === "read") elementArrayRead.splice(d, 1);
+        if (elementArrayRead[d] === "") elementArrayRead.splice(d, 1);
       }
       for (var e = elementArrayRead.length - 1; e--; ) {
         if (elementArrayRead[e] === "read") elementArrayRead.splice(e, 1);
-        if (elementArrayRead[e] === "read") elementArrayRead.splice(e, 1);
+        if (elementArrayRead[e] === "") elementArrayRead.splice(e, 1);
       }
 
       //modify status
 
       console.log(elementArrayWant);
       console.log(bookKeys);
+      //console.log(books);
+      //console.log(JSON.stringify(books));
+      console.log(books.b9780525536291);
 
-      for (f = 0; f < bookKeys.length; f++){
-          if (bookKeys.includes(elementArrayWant) == true){
-            //Object.keys(books).forEach(function (key) {}
-            alert("match");
-          }
+      //for every instance the b# shows up in elementArrayWant, change the b# key status to 1
+      Object.keys(books).forEach(function (key) {
+        //console.log(books[key].author);
+      });
+
+      for (var f = 0; f < bookKeys.length; f++) {
+        if (bookKeys[f].includes(elementArrayWant)) {
+          alert("On the right track");
+        }
       }
-
-
     }
   </script>
 </html>

@@ -92,6 +92,7 @@
         status: 2,
       },
     };
+    var bookKeys = Object.keys(chosenBooks);
 
     function startPage() {
       document.getElementById("startChallenge").style.display = "none";
@@ -157,7 +158,7 @@
       middleHTML += wantToRead();
       middleHTML += "</div>";
       middleHTML += "<br />";
-      middleHTML += "<input type='button' value='Update' />";
+      middleHTML += "<input type='button' id='update1' value='Update' />";
       middleHTML += "</div>";
       middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
       middleHTML += "<div class='col-md-5' id='completed'>";
@@ -167,10 +168,13 @@
       middleHTML += doneBooks();
       middleHTML += "</div>";
       middleHTML += "<br />";
-      middleHTML += "<input type='button' value='Update' />";
+      middleHTML += "<input type='button' id='update2' value='Update' />";
       middleHTML += "</div>";
 
       document.getElementById("middle").innerHTML = middleHTML;
+      document
+        .getElementById("update1")
+        .addEventListener("click", completedBooks);
     }
 
     function wantToRead() {
@@ -255,6 +259,60 @@
       doneBooksOutput += "</table>";
 
       return doneBooksOutput;
+    }
+
+    function completedBooks() {
+      //move books from Want to Read --> Completed
+      //need to call to removeBooks()
+
+      //get the values from the dropdowns
+      var elements = document.getElementsByClassName("bookDD1");
+      var elementNames = "";
+      for (var a = 0; a < elements.length; a++) {
+        elementNames += elements[a].id + "@" + elements[a].value + "@";
+        elementNames += "*";
+      }
+
+      //split out the elements
+      var elementArray = elementNames.split("*");
+
+      //filter down the elements to the change needed; 1 = want, 2 = read, 3 = remove
+      var elementArray1 = "";
+      var elementArrayRead = "";
+
+      for (b = 0; b < elementArray.length; b++) {
+        if (elementArray[b].includes("read")) {
+          elementArray1 += elementArray[b];
+        }
+      }
+      var elementArrayRead = elementArray1.split("@");
+
+      //Remove status and blanks from the arrays
+      for (var c = elementArrayRead.length - 1; c--; ) {
+        if (elementArrayRead[c] === "read") elementArrayRead.splice(c, 1);
+        if (elementArrayRead[c] === "") elementArrayRead.splice(c, 1);
+      }
+
+      //modify status of books
+      console.log(elementArrayRead);
+      console.log(bookKeys);
+
+      //currently only works if one book is selected
+      for (var d = 0; d < bookKeys.length; d++) {
+        if (bookKeys[d].includes(elementArrayRead)) {
+          alert("On the right track");
+          
+        }
+      }
+    }
+
+    function undoBooks() {
+      //move books from Completed --> Want to Read
+      //need to call to removeBooks()
+    }
+
+    function removeBooks() {
+      //remove books entirely from challenge
     }
   </script>
 </html>
