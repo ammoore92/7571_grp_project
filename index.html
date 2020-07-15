@@ -9,32 +9,38 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <style>
+      img {
+        width: 75px;
+        height: 100px;
+      }
+
+      /*Need fixed table headers*/
+    </style>
     <title>Reading Challenge</title>
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row" id="title">
-        <h1>Reading Challenge</h1>
-      </div>
-      
+      <div class="row" id="title"><h1>Reading Challenge</h1></div>
+
       <div id="basicPage">
-        <div class="row">
-          <div id="topBanner1"></div>
-        </div>
+        <div class="row"><div id="topBanner1"></div></div>
 
         <hr />
-        <input
-        type="button"
-        class="form-control btn btn-success"
-        id="startChallenge"
-        value="Start Challenge"
-      />
-      <div id="editReading"></div>
 
+        <input
+          type="button"
+          class="form-control btn btn-success"
+          id="startChallenge"
+          value="Start Challenge"
+        />
+        <div id="editReading"></div>
 
         <div class="row" id="middle"></div>
+      </div>
     </div>
   </body>
+
   <footer>
     <hr />
     <p>
@@ -55,13 +61,38 @@
     var challengeMonth = "July";
     var challengeYear = 2020;
     var challengeMonthDays = 31;
+
     var chosenBooks = {
-        //bookCover: "https://s1.nyt.com/du/books/images/9780525536291.jpg",
-        //title: "The Vanishing Half",
-        //Author: "Brit Bennett",
-        //Status: 0
-        //(Status of 0 would be in NYT list, 1 would be want to read, 2 would be completed)
+      b9780525536291: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780525536291.jpg",
+        title: "The Vanishing Half",
+        author: "Brit Bennett",
+        isbn: "9780525536291",
+        status: 0,
+      },
+      b9780316420044: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780316420044.jpg",
+        title: "28 Summers",
+        author: "Elin Hilderbrand",
+        isbn: "9780316420044",
+        status: 1,
+      },
+      b9780735219090: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780735219090.jpg",
+        title: "Where the Crawdads Sing",
+        author: "Delia Owens",
+        isbn: "9780735219090",
+        status: 1,
+      },
+      b9780385546270: {
+        bookCover: "https://s1.nyt.com/du/books/images/9780385546270.jpg",
+        title: "Sex and Vantity",
+        author: "Kevin Kwan",
+        isbn: "9780385546270",
+        status: 2,
+      },
     };
+    var bookKeys = Object.keys(chosenBooks);
 
     function startPage() {
       document.getElementById("startChallenge").style.display = "none";
@@ -69,19 +100,20 @@
     }
 
     function editPage() {
-        var editReading = "";
-        editReading += "<h3>Edit Challenge</h3>";
-        editReading += "<input type='button' id ='saveChallenge' value='Save' />"
-        document.getElementById("editReading").innerHTML = editReading;
-        document.getElementById("saveChallenge").addEventListener("click", basicPage);
+      var editReading = "";
+      editReading += "<h3>Edit Challenge</h3>";
+      editReading += "<input type='button' id ='saveChallenge' value='Save' />";
+      document.getElementById("editReading").innerHTML = editReading;
+      document
+        .getElementById("saveChallenge")
+        .addEventListener("click", basicPage);
     }
 
     function basicPage() {
-        
-        topBannerPopulation();
-        middleBannerPopulation();
-        var removeEdit = document.getElementById("editReading");
-        removeEdit.remove();
+      topBannerPopulation();
+      middleBannerPopulation();
+      var removeEdit = document.getElementById("editReading");
+      removeEdit.remove();
     }
 
     function topBannerPopulation() {
@@ -118,29 +150,168 @@
     }
 
     function middleBannerPopulation() {
-      console.log("start here");
       var middleHTML = "";
-        middleHTML += "<div class='col-md-5' id='want'>";
-        middleHTML += "<h3>Want to Read</h3>";
-        middleHTML += "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
-        middleHTML += "</div>";
-        middleHTML += "<br />";
-        middleHTML += "<input type='button' value='Update' />"
-        middleHTML += "</div>";
-        middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
-        middleHTML += "<div class='col-md-5' id='completed'>";
-        middleHTML += "<h3>Completed</h3>";
-        middleHTML += "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
-        middleHTML += "</div>";
-        middleHTML += "<br />";
-        middleHTML += "<input type='button' value='Update' />"
-        middleHTML += "</div>";
+      middleHTML += "<div class='col-md-5' id='want'>";
+      middleHTML += "<h3>Want to Read</h3>";
+      middleHTML +=
+        "<div id='wantList' style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
+      middleHTML += wantToRead();
+      middleHTML += "</div>";
+      middleHTML += "<br />";
+      middleHTML += "<input type='button' id='update1' value='Update' />";
+      middleHTML += "</div>";
+      middleHTML += "<div class='col-md-2' id='middleSpace'></div>";
+      middleHTML += "<div class='col-md-5' id='completed'>";
+      middleHTML += "<h3>Completed</h3>";
+      middleHTML +=
+        "<div style='height:400px;width:450px;border:1px solid #ccc;overflow:auto'>";
+      middleHTML += doneBooks();
+      middleHTML += "</div>";
+      middleHTML += "<br />";
+      middleHTML += "<input type='button' id='update2' value='Update' />";
+      middleHTML += "</div>";
 
       document.getElementById("middle").innerHTML = middleHTML;
+      document
+        .getElementById("update1")
+        .addEventListener("click", completedBooks);
     }
 
     function wantToRead() {
-        
+      var chosenBooksOutput = "";
+
+      chosenBooksOutput += "<table class='table'>";
+
+      chosenBooksOutput += "<thead>";
+      chosenBooksOutput += "<th>Cover</th>";
+      chosenBooksOutput += "<th>Title/Author</th>";
+      chosenBooksOutput += "<th>Completed</th>";
+      chosenBooksOutput += "</thead>";
+
+      chosenBooksOutput += "<tbody>";
+
+      Object.keys(chosenBooks).forEach(function (key) {
+        if (chosenBooks[key].status == 1) {
+          chosenBooksOutput += "<tr>";
+          chosenBooksOutput +=
+            "<td><img src='" + chosenBooks[key].bookCover + "'></td>";
+          chosenBooksOutput +=
+            "<td><i>" +
+            chosenBooks[key].title +
+            "</i><br>" +
+            chosenBooks[key].author +
+            "</td>";
+          chosenBooksOutput +=
+            "<td><select name='option1' class='bookDD1' id='b" +
+            chosenBooks[key].isbn +
+            "'>";
+          chosenBooksOutput += "<option></option>";
+          chosenBooksOutput += "<option value='read'>Read</option>";
+          chosenBooksOutput += "<option value='remove'>Remove</option>";
+          chosenBooksOutput += "</select></td>";
+          chosenBooksOutput += "</tr>";
+        }
+      });
+
+      chosenBooksOutput += "</tbody>";
+      chosenBooksOutput += "</table>";
+
+      return chosenBooksOutput;
+    }
+
+    function doneBooks() {
+      var doneBooksOutput = "";
+
+      doneBooksOutput += "<table class='table'>";
+
+      doneBooksOutput += "<thead>";
+      doneBooksOutput += "<th>Cover</th>";
+      doneBooksOutput += "<th>Title/Author</th>";
+      doneBooksOutput += "<th>Completed</th>";
+      doneBooksOutput += "</thead>";
+
+      doneBooksOutput += "<tbody>";
+
+      Object.keys(chosenBooks).forEach(function (key) {
+        if (chosenBooks[key].status == 2) {
+          doneBooksOutput += "<tr>";
+          doneBooksOutput +=
+            "<td><img src='" + chosenBooks[key].bookCover + "'></td>";
+          doneBooksOutput +=
+            "<td><i>" +
+            chosenBooks[key].title +
+            "</i><br>" +
+            chosenBooks[key].author +
+            "</td>";
+          doneBooksOutput +=
+            "<td><select name='option2' class='bookDD2' id='b" +
+            chosenBooks[key].isbn +
+            "'>";
+          doneBooksOutput += "<option></option>";
+          doneBooksOutput += "<option value='want'>Undo Read</option>";
+          doneBooksOutput += "<option value='remove'>Remove</option>";
+          doneBooksOutput += "</select></td>";
+          doneBooksOutput += "</tr>";
+        }
+      });
+
+      doneBooksOutput += "</tbody>";
+      doneBooksOutput += "</table>";
+
+      return doneBooksOutput;
+    }
+
+    function completedBooks() {
+      //move books from Want to Read --> Completed
+      //need to call to removeBooks()
+
+      //get the values from the dropdowns
+      var elements = document.getElementsByClassName("bookDD1");
+      var elementNames = "";
+      for (var a = 0; a < elements.length; a++) {
+        elementNames += elements[a].id + "@" + elements[a].value + "@";
+        elementNames += "*";
+      }
+
+      //split out the elements
+      var elementArray = elementNames.split("*");
+
+      //filter down the elements to the change needed; 1 = want, 2 = read, 3 = remove
+      var elementArray1 = "";
+      var elementArrayRead = "";
+
+      for (b = 0; b < elementArray.length; b++) {
+        if (elementArray[b].includes("read")) {
+          elementArray1 += elementArray[b];
+        }
+      }
+      var elementArrayRead = elementArray1.split("@");
+
+      //Remove status and blanks from the arrays
+      for (var c = elementArrayRead.length - 1; c--; ) {
+        if (elementArrayRead[c] === "read") elementArrayRead.splice(c, 1);
+        if (elementArrayRead[c] === "") elementArrayRead.splice(c, 1);
+      }
+
+      //modify status of books
+      console.log(elementArrayRead);
+      console.log(bookKeys);
+
+      //currently only works if one book is selected
+      for (var d = 0; d < bookKeys.length; d++) {
+        if (bookKeys[d].includes(elementArrayRead)) {
+          alert("On the right track");
+        }
+      }
+    }
+
+    function undoBooks() {
+      //move books from Completed --> Want to Read
+      //need to call to removeBooks()
+    }
+
+    function removeBooks() {
+      //remove books entirely from challenge
     }
   </script>
 </html>
