@@ -56,8 +56,8 @@
       .getElementById("startChallenge")
       .addEventListener("click", startPage);
 
-    var booksCompleted = 14;
-    var booksPledged = 15;
+    var booksCompleted = 1;
+    var booksPledged = "error"; // may be able to delete after finish
     var challengeMonth = "July";
     var challengeYear = 2020;
     var challengeMonthDays = 31;
@@ -101,8 +101,17 @@
 
     function editPage() {
       var editReading = "";
-      editReading += "<h3>Edit Challenge</h3>";
+      editReading += "<h2>Edit Challenge</h2>";
+      editReading += "<hr />";
+      editReading += "<h2>I want to read <input id='numberOfBooks' type='number'> books by <input id='dateOfChallenge' type='date'>.</h2>";
+      editReading += "<hr />";
+      editReading += "<h3>The books I want to read are:</h3>";
+      editReading += "<div class='card' id='apiBooks'><div class = 'card-body'>";
+      editReading += "<p>api</p>";
+      editReading += "</div></div>";
+      editReading += "<hr />";
       editReading += "<input type='button' id ='saveChallenge' value='Save' />";
+      editReading += "<button id='resetChallenge' type='button' class='btn btn-danger'>Delete This Challenge</button>";
       document.getElementById("editReading").innerHTML = editReading;
       document
         .getElementById("saveChallenge")
@@ -110,13 +119,15 @@
     }
 
     function basicPage() {
-      topBannerPopulation();
+      var booksPledged = document.getElementById("numberOfBooks").value;
+      var challengeDate = document.getElementById("dateOfChallenge").value;
+      topBannerPopulation(booksPledged, challengeDate);
       middleBannerPopulation();
       var removeEdit = document.getElementById("editReading");
       removeEdit.remove();
     }
 
-    function topBannerPopulation() {
+    function topBannerPopulation(booksPledged, challengeDate) {
       var todayDate = new Date();
       var completionPercentage = Math.round(
         (booksCompleted / booksPledged) * 100
@@ -126,10 +137,10 @@
       topHTML +=
         "<h4>Read " +
         booksPledged +
-        " books in " +
-        challengeMonth +
-        " " +
-        challengeYear +
+        " books by " +
+        challengeDate + //challengeMonth +
+        //" " +
+        //challengeYear +
         ".";
       topHTML += "<br />";
       topHTML += "# books " + "behind/ahead of" + " schedule.";
