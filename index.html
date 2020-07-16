@@ -57,9 +57,9 @@
       .addEventListener("click", startPage);
 
     var booksCompleted = 1;
-    var booksPledged = "error"; // may be able to delete after finish
-    var challengeMonth = "July";
-    var challengeYear = 2020;
+    var booksPledged = "error"; // may be able to delete after finish - Avery
+    var challengeMonth = "July"; // not used - Avery
+    var challengeYear = 2020; // not used - Avery
     var challengeMonthDays = 31;
 
     var chosenBooks = {
@@ -155,9 +155,16 @@
         "%'";
       topHTML += "</div>";
       topHTML += completionPercentage + "%";
-      topHTML += "</div>";
+      topHTML += "</div></div>";
+      topHTML += "<br><button id='editChallengebtn' type='button' class='btn btn-warning'>Edit Challenge</button>";
 
       document.getElementById("topBanner1").innerHTML = topHTML;
+      document.getElementById("editChallengebtn").addEventListener("click", editChallenge);
+    }
+
+    function editChallenge(){
+      document.getElementById("basicPage").style.display = "none";
+      editPage(); //not fully working as it is coming back null - Avery
     }
 
     function middleBannerPopulation() {
@@ -312,6 +319,7 @@
       for (var d = 0; d < bookKeys.length; d++) {
         if (bookKeys[d].includes(elementArrayRead)) {
           alert("On the right track");
+
         }
       }
     }
