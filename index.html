@@ -100,6 +100,7 @@
     }
 
     function editPage() {
+      apiFiction();
       var editReading = "";
       editReading += "<h2>Edit Challenge</h2>";
       editReading += "<hr />";
@@ -107,7 +108,9 @@
       editReading += "<hr />";
       editReading += "<h3>The books I want to read are:</h3>";
       editReading += "<div class='card' id='apiBooks'><div class = 'card-body'>";
-      editReading += "<p>api</p>";
+      editReading += "<p>";
+      editReading += "";
+      editReading += "</p>";
       editReading += "</div></div>";
       editReading += "<hr />";
       editReading += "<input type='button' id ='saveChallenge' value='Save' />";
@@ -116,6 +119,16 @@
       document
         .getElementById("saveChallenge")
         .addEventListener("click", basicPage);
+    }
+
+    function apiFiction(){
+      async function api1(){
+        let response = await fetch('https://api.nytimes.com/svc/books/v3/lists/combined-print-and-e-book-fiction.json?api-key=yKk5FpjwxMcg9EeAfjI2em6niAXP0GYb');
+        let data = await response.json()
+        return data;
+      }
+      y=0
+      api1(y).then(data => console.log(data.results.books[y].author));
     }
 
     function basicPage() {
@@ -164,7 +177,7 @@
 
     function editChallenge(){
       document.getElementById("basicPage").style.display = "none";
-      editPage(); //not fully working as it is coming back null - Avery
+      editPage();
     }
 
     function middleBannerPopulation() {
